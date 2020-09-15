@@ -70,7 +70,8 @@ list_result = pco.iterate('https://api.planningcenteronline.com/people/v2/lists/
 # A CSV file will be created with all the updated profiles.
 with open('people_maped.csv', 'w', newline='') as csvfile:
     writer = csv.writer(csvfile, delimiter='|', quotechar='"', quoting=csv.QUOTE_NONE)
-    writer.writerow(['pco_id', 'name', 'current_inactive_date', 'current_inactive_reason_id', 'current_inactive_reason', 'removed_by_date', 'removed_by_reason', 'link'])
+    writer.writerow(['pco_id', 'name', 'current_inactive_date', 'current_inactive_reason_id', 'current_inactive_reason',
+                     'removed_by_date', 'removed_by_reason', 'link'])
     for r in list_result:
         person = pco.get(f'/people/v2/people/{r["data"]["id"]}?include=field_data,inactive_reason')
         removed_by_date = ""
@@ -94,7 +95,8 @@ with open('people_maped.csv', 'w', newline='') as csvfile:
         inactive_reason = "None"
         try:
             inactive_reason_id = person['data']['relationships']['inactive_reason']['data']['id']
-            inactive_reason = pco.get(f'/people/v2/inactive_reasons/{inactive_reason_id}')['data']['attributes']['value']
+            inactive_reason = pco.get(f'/people/v2/inactive_reasons/{inactive_reason_id}')['data']['attributes'][
+                'value']
         except Exception as e:
             pass
 
@@ -121,4 +123,13 @@ with open('people_maped.csv', 'w', newline='') as csvfile:
 
         print(person_payload)
         print(row)
+
+        # Comment this line out to do a dry run that will just generate a csv with the proposed updates.
         pco.patch(f'/people/v2/people/{person["data"]["id"]}', person_payload)
+
+# Correct output should look like this:
+# {'data': {'attributes': {'status': 'inactive', 'inactivated_at': '13/08/2013'}, 'relationships': {'inactive_reason': {'data': {'type': 'InactiveReason', 'id': '4454896'}}}}}
+# ['75417445', 'John Doe', 'None', 'None', 'None', '09/13/2011', 'Not attending', 'https://people.planningcenteronline.com/people/AC760000']
+
+# The first line is the update payload.
+# The second line is the current information.
