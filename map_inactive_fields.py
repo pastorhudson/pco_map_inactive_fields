@@ -81,12 +81,12 @@ with open('people_maped.csv', 'w', newline='') as csvfile:
             link = f"https://people.planningcenteronline.com/people/AC{person['data']['id']}"
             try:
                 # Set the correct ID for your custom field_definition's Inactive Date
-                if d['relationships']['field_definition']['data']['id'] == '364583':
+                if d['relationships']['field_definition']['data']['id'] == '<FIELD_DEFINITION_ID':
                     removed_by_date = d['attributes']['value']
                     rbd_split = "/".join(
                         [removed_by_date.split('/')[1], removed_by_date.split('/')[0], removed_by_date.split('/')[2]])
                 # Set the correct ID for your custom field_definition's Inactive Reason
-                if d['relationships']['field_definition']['data']['id'] == '364582':
+                if d['relationships']['field_definition']['data']['id'] == '<FIELD_DEFINITION_ID>':
                     removed_by_reason = d['attributes']['value']
             except Exception as e:
                 pass
