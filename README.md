@@ -22,5 +22,14 @@ They graciously allowed me to post this as open source incase another church nee
 - Comment out line 128 `pco.patch(f'/people/v2/people/{person["data"]["id"]}', person_payload)` to do a dry run.
 - Examine the newly created `people_maped.csv` to see if the data looks correct.
 - If all looks good uncomment line 128 and run the script again.
+- Correct output should look like this:
+    - The first line is the update payload.
+    - The second line is the current information.
+```
+{'data': {'attributes': {'status': 'inactive', 'inactivated_at': '13/08/2013'}, 'relationships': {'inactive_reason': {'data': {'type': 'InactiveReason', 'id': '4454896'}}}}}
+['75417445', 'John Doe', 'None', 'None', 'None', '09/13/2011', 'Not attending', 'https://people.planningcenteronline.com/people/AC760000']
+```
+I hope this helps you and your church in some way.
+Thanks to Christ Lutheran Church for allowing me to share this.
 
 
