@@ -7,7 +7,7 @@ Upon import they realized they needed to mark profiles as "Inactive" and set the
 They graciously allowed me to post this as open source incase another church needs it.
 
 ### Instructions
-- Edit secrets.env Adding your own Personal Access Tokens form https://api.planningcenteronline.com/oauth/applications
+- Edit secrets.env Adding your own Personal Access Tokens from https://api.planningcenteronline.com/oauth/applications
 - Update the reasons_map at the top of map_inactive_fields.py
     - Use https://api.planningcenteronline.com/people/v2/inactive_reasons to get the reason id's.
     - Anything you want to map to "No Reason provided" set to None
